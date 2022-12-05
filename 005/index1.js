@@ -23,24 +23,26 @@ let stack7 = ['D', 'Z', 'C', 'V', 'F', 'N', 'J'];
 let stack8 = ['L', 'G', 'Z', 'D', 'W', 'R', 'F', 'Q'];
 let stack9 = ['J', 'B', 'W', 'V', 'P'];
 
-const stacks = [stack1, stack2, stack3, stack4, stack5, stack6, stack7, stack8, stack9]
+const stacks = [stack1, stack2, stack3, stack4, stack5, stack6, stack7, stack8, stack9];
 
+// pull numbers from lines and assign to respective variables
 for (i=0; i<lines.length; i++) {
     let currentLine = lines[i].match(/[+]?[0-9]*\.?[0-9]+/g);
-    let quantity = Number(currentLine[0])
-    let fromStack = Number(currentLine[1])
-    let toStack = Number(currentLine[2])
+    let quantity = Number(currentLine[0]);
+    let fromStack = Number(currentLine[1]);
+    let toStack = Number(currentLine[2]);
 
+    // take last crate from stack and move it to new stack
     for (j=0; j<quantity; j++){
         let crateRemoved = stacks[fromStack-1].pop()
         stacks[toStack-1].push(crateRemoved)
-    }
-}
+    };
+};
 
-
-console.log(stacks)
-// console.log(quantity)
-// console.log(fromStack)
-// console.log(toStack)
-// console.log(stacks[4])
-// console.log(stacks[6])
+// get the last crate from each stack, add to array and join
+let topItem = [];
+for (i=0; i<stacks.length; i++) {
+    let item = stacks[i].pop();
+    topItem.push(item);
+};
+console.log(topItem.join(''));

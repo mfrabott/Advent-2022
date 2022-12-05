@@ -23,30 +23,31 @@ let stack7 = ['D', 'Z', 'C', 'V', 'F', 'N', 'J'];
 let stack8 = ['L', 'G', 'Z', 'D', 'W', 'R', 'F', 'Q'];
 let stack9 = ['J', 'B', 'W', 'V', 'P'];
 
-const stacks = [stack1, stack2, stack3, stack4, stack5, stack6, stack7, stack8, stack9]
+const stacks = [stack1, stack2, stack3, stack4, stack5, stack6, stack7, stack8, stack9];
 
+// pull numbers from lines and assign to respective variables
 for (i=0; i<lines.length; i++) {
     let currentLine = lines[i].match(/[+]?[0-9]*\.?[0-9]+/g);
-    let quantity = Number(currentLine[0])
-    let fromStack = Number(currentLine[1]-1)
-    let toStack = Number(currentLine[2]-1)
-
-    let cratesRemoved = stacks[fromStack].slice(stacks[fromStack].length-quantity)
-    
-    let cratesRemaining = stacks[fromStack].slice(0, stacks[fromStack].length-quantity)
-
+    let quantity = Number(currentLine[0]);
+    let fromStack = Number(currentLine[1]-1);
+    let toStack = Number(currentLine[2]-1);
+    // create an array for crates removed from stack
+    let cratesRemoved = stacks[fromStack].slice(stacks[fromStack].length-quantity);
+    // create array for crates not removed
+    let cratesRemaining = stacks[fromStack].slice(0, stacks[fromStack].length-quantity);
+    // replace fromStack array with remaining array
     stacks[fromStack] = cratesRemaining
-
+    // add each of the removed crates, starting from index 0, to the new stack
     for (j=0; j<quantity; j++){
-        let crateRemoved = cratesRemoved.shift()
-        stacks[toStack].push(crateRemoved)
+        let crateRemoved = cratesRemoved.shift();
+        stacks[toStack].push(crateRemoved);
     }
 }
 
-
-console.log(stacks)
-// console.log(quantity)
-// console.log(fromStack)
-// console.log(toStack)
-// console.log(stacks[4])
-// console.log(stacks[6])
+// get the last crate from each stack, add to array and join
+let topItem = [];
+for (i=0; i<stacks.length; i++) {
+    let item = stacks[i].pop();
+    topItem.push(item);
+}
+console.log(topItem.join(''));
