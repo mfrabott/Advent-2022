@@ -1,23 +1,18 @@
-
 const fs = require('fs');
-const data = fs.readFileSync('data1.txt', 'utf8');
-const lines = data.split(/\n/);
+const data = fs.readFileSync('data.txt', 'utf8');
 
-let currentCalories = 0;
-let mostCalories = 0;
+for (i=0; i<=data.length; i++){
+        
+    let fourCharsArray = [data[i], data[i+1], data[i+2], data[i+3]]
 
-for (i=0; i<=lines.length; i++){
-    if (lines[i]===''){
-        if (currentCalories > mostCalories){
-            mostCalories = currentCalories;
-            currentCalories = 0;
-        } else {
-            currentCalories = 0;
-        }
-    } else {
-        currentCalories += Number(lines[i]);
+    // COnvert to set without duplicates, if not same length as input array, return true
+    function hasDuplicates(arr) {
+        return new Set(arr).size !== arr.length;
+    }
+    
+    // if false, print last character position
+    if (!hasDuplicates(fourCharsArray)) {
+        console.log(i+4);
+        break
     }
 }
-
-console.log(mostCalories)
-
